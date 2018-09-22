@@ -1,16 +1,9 @@
 import unittest
 from flask import json
-<<<<<<< HEAD
 from fastfoodapp import app
 from fastfoodapp import resources
 from fastfoodapp import models
 
-=======
-import resources
-from models import *
-from app import app, resources, models
-from app import  app
->>>>>>> 1d6d004a69d62a5cffa0846cc3446e627b67a678
 class test_orders(unittest.TestCase):
     def setUp(self):
         self.app = app.app.test_client()

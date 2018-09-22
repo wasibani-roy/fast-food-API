@@ -6,11 +6,8 @@ install:
   - pip install -r requirements.txt
   - pip install coveralls
 # command to run tests
-<<<<<<< HEAD
+
 script: pytest -v --cov=fastfoodapp --cov-report term-missing
-=======
-script: pytest -v --cov=app/ --cov-report term-missing
->>>>>>> 1d6d004a69d62a5cffa0846cc3446e627b67a678
 branches:only: api
 after_success:
   - coveralls
