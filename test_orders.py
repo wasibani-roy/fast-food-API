@@ -3,6 +3,8 @@ from flask import json
 import resources
 from models import *
 from app import app
+require 'coveralls'
+Coveralls.wear!
 class test_orders(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
