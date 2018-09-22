@@ -3,7 +3,7 @@ from flask import json
 import resources
 from models import *
 from app import app
-require 'coveralls'
+import coveralls
 Coveralls.wear!
 class test_orders(unittest.TestCase):
     def setUp(self):
