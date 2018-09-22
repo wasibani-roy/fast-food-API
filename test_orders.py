@@ -1,16 +1,18 @@
 import unittest
 from flask import json
-from models import *
-from app import app
+from fastfoodapp import app
+from fastfoodapp import resources
+from fastfoodapp import models
+
 class test_orders(unittest.TestCase):
     def setUp(self):
-        self.app = app.test_client()
+        self.app = app.app.test_client()
         self.test_data = {"product": "chicken", "quantity": "1", "price": "12000"}
         self.test_data_error_no_id = "Sorry orderid not found"
         self.test_data_update_approve = {"product": "chicken", "quantity": "1", "price": "12000", "Status":"Approved"}
         self.test_data_update_deny = {"product": "chicken", "quantity": "1", "price": "12000", "Status": "Denied"}
         self.test_data_update_no_status = {"Error": "No status change has been made"}
-        self.testModal = order()
+        self.testModal = models.order()
         self.testModal.orders[1] = {"product": "chicken", "quantity": "1", "price": "12000"}
 
     def test_API_Make_Order(self):
