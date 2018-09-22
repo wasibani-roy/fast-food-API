@@ -4,7 +4,6 @@ import resources
 from models import *
 from app import app
 import coveralls
-Coveralls.wear!
 class test_orders(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
