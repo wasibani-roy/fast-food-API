@@ -2,7 +2,8 @@ import unittest
 from flask import json
 import resources
 from models import *
-from app import app
+from app import app resources models
+from app import  app
 class test_orders(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
