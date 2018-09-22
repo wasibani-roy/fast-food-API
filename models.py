@@ -17,18 +17,19 @@ class order:
     def specific_order(self,orderId):
         y=int(orderId)
         if y in self.orders.keys():
-            return self.orders[y]
+            return {"order_details": self.orders[y], "status_code":200}
         else:
             return ('Sorry orderid not found')
 
     def update_order(self,orderId,orderStatus):
         new_status=int(orderStatus)
+        print (new_status)
         if new_status == 1:
             self.orders[orderId].update({"Status": "Approved"})
-            return self.orders[orderId]
+            return {"order_details": self.orders[orderId], "status_code":200}
         elif new_status == 2:
             self.orders[orderId].update({"Status": "Denied"})
-            return self.orders[orderId]
+            return {"order_details": self.orders[orderId], "status_code":200}
         else:
             return {"Error": "No status change has been made"}
 

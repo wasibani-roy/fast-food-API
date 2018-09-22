@@ -31,7 +31,10 @@ class specific_order(Resource):
 
 class update_order(Resource):
     def put(self, id):
+        id = int(id)
         orders=order()
+        print('order_status')
         order_status = flask.request.form["status"]
+        # print(order_status)
         return orders.update_order(id,order_status)
 
