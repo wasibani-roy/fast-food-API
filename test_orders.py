@@ -28,7 +28,7 @@ class test_orders(unittest.TestCase):
         self.assertEqual(orderValue["order_details"], self.test_data)
 
     def test_API_get_specific_order_wrong_id(self):
-        self.assertEqual(self.testModal.specific_order(9), self.test_data_error_no_id)
+        self.assertEqual(self.testModal.specific_order(0), self.test_data_error_no_id)
 
     def test_API_update_specific_order_approve(self):
         orderValue = self.testModal.update_order(1,1)
