@@ -19,17 +19,16 @@ class order:
         if y in self.orders.keys():
             return {"order_details": self.orders[y], "status_code":200}
         else:
-            return ('Sorry orderid not found')
+            return {"Error": "Order id not found"}
 
-    def update_order(self,orderId,orderStatus):
-        new_status=int(orderStatus)
-        print (new_status)
+    def update_order(self,order_id,order_status):
+        new_status=int(order_status)
         if new_status == 1:
-            self.orders[orderId].update({"Status": "Approved"})
-            return {"order_details": self.orders[orderId], "status_code":200}
+            self.orders[order_id].update({"Status": "Approved"})
+            return {"order_details": self.orders[order_id], "status_code":200}
         elif new_status == 2:
-            self.orders[orderId].update({"Status": "Denied"})
-            return {"order_details": self.orders[orderId], "status_code":200}
+            self.orders[order_id].update({"Status": "Denied"})
+            return {"order_details": self.orders[order_id], "status_code":200}
         else:
             return {"Error": "No status change has been made"}
 
