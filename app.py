@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api
-import resources
+from fast_food_app import resources
 app = Flask(__name__)
 app.debug=True
 api = Api(app)

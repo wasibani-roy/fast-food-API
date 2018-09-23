@@ -1,14 +1,13 @@
 import unittest
 from flask import json
-from fastfoodapp import app
-from fastfoodapp import resources
-from fastfoodapp import models
+import app
+from fast_food_app import models
 
 class test_orders(unittest.TestCase):
     def setUp(self):
         self.app = app.app.test_client()
         self.test_data = {"product": "chicken", "quantity": "1", "price": "12000"}
-        self.test_data_error_no_id = "Sorry orderid not found"
+        self.test_data_error_no_id = {"Error": "Order id not found"}
         self.test_data_update_approve = {"product": "chicken", "quantity": "1", "price": "12000", "Status":"Approved"}
         self.test_data_update_deny = {"product": "chicken", "quantity": "1", "price": "12000", "Status": "Denied"}
         self.test_data_update_no_status = {"Error": "No status change has been made"}
@@ -28,7 +27,7 @@ class test_orders(unittest.TestCase):
         self.assertEqual(orderValue["order_details"], self.test_data)
 
     def test_API_get_specific_order_wrong_id(self):
-        self.assertEqual(self.testModal.specific_order(0), self.test_data_error_no_id)
+        self.assertEqual(self.testModal.specific_order(9), self.test_data_error_no_id)
 
     def test_API_update_specific_order_approve(self):
         orderValue = self.testModal.update_order(1,1)

@@ -1,10 +1,10 @@
 from flask_restful import Resource
 import flask
-from models import order
+from fast_food_app import models
 
 class make_order(Resource):
     def post(self):
-        orders=order()
+        orders=models.order()
         product = flask.request.form["product"]
         quantity = flask.request.form["quantity"]
         price = flask.request.form["price"]
@@ -17,24 +17,22 @@ class make_order(Resource):
 
 class Orders(Resource):
     def get(self):
-        orders = order()
+        orders = models.order()
 
         return orders.list_orders()
 
 
 class specific_order(Resource):
     def get(self, id):
-        orders=order()
-        orderid = int(id)
-        return orders.specific_order(orderid)
+        orders=models.order()
+        order_id = int(id)
+        return orders.specific_order(order_id)
 
 
 class update_order(Resource):
     def put(self, id):
         id = int(id)
-        orders=order()
-        print('order_status')
+        orders=models.order()
         order_status = flask.request.form["status"]
-        # print(order_status)
         return orders.update_order(id,order_status)
 
