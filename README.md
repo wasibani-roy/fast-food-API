@@ -31,10 +31,10 @@ in terminal run command python app.py
 Within you're enviroment run command pytest
 
 ### Built With
- Python
- Flask
- FlaskRestFul
- pytest
+ - Python
+ - Flask
+ - FlaskRestFul
+ - pytest
 
 ##### Author 
  - Wasibani Roy
