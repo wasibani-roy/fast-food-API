@@ -3,7 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/wasibani-roy/fast-food-API/badge.svg?branch=api)](https://coveralls.io/github/wasibani-roy/fast-food-API?branch=api)
 
 # Fast-Food-Fast-app
-Fast-Food-Fast-app is a food ordering app. The app is currnetly built using data structures for non persistent data
+Fast-Food-Fast-app is a food ordering app. The app is currnetly built using data structures for non persistent data.It is designed to enable a user to place an order for a meal from the comfort of there office or home
 
 ### Getting started
 git clone https://github.com/wasibani-roy/fast-food-API.git into a directory of your choice
