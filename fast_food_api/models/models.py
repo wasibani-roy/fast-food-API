@@ -76,6 +76,58 @@ class Users:
     def verify_hash(password, hash):
         return sha256.verify(password, hash)'''
 
+    
+    # @jwt_required
+    # def admin_login_decorator(self, current_user):
+    #     user = get_jwt_identity()
+    #     def wrapTheFunction():
+    #         user = database_query.database_query()
+    #         database_query.cur.execute("select * from users where userid = %d", [current_user])
+    #         result = database_query.cur.rowcount
+    #         if result > 0:
+    #             data = database_query.cur.fetchone()
+    #             if data[1] != "admin":
+    #                 return jsonify({"Error":"Access denied"}), 400
+    #
+    #     return wrapTheFunction
+
+class Order:
+    def add_order(self,data):
+        x = database_query.database_query()
+        if x.check_table("orders"):
+            user_id = int(data["userid"])
+            menu_item_id = int(data["menuid"])
+            query = "insert into orders(menu_item_id, user_id) values (%s, %s)"
+            order_details = (menu_item_id, user_id)
+            database_query.cur.execute(query, order_details)
+            database_query.con.commit()
+            return ("Menu item added")
+        else:
+            database_query.cur.execute \
+                    (
+                    "create table orders(order_id serial primary key,menu_item_id integer references menu(menu_id), user_id integer references users(user_id))")
+            user_id = int(data["userid"])
+            menu_item_id = int(data["menuid"])
+            query = "insert into orders(menu_item_id, user_id) values (%s, %s)"
+            order_details = (menu_item_id, user_id)
+            database_query.cur.execute(query, order_details)
+            database_query.con.commit()
+            return ("Menu item now created")
+
+    def get_order_items(self):
+        x =database_query.database_query()
+        database_query.cur.execute("select users.username, menu.product, menu.price from orders join users on orders.user_id=users.user_id join menu on orders.menu_item_id=menu.menu_id")
+        data = database_query.cur.fetchall()
+        return jsonify(data), 200
+
+    def order_by_id(self,order_id):
+        x = database_query.database_query()
+        database_query.cur.execute\
+            ("select users.username, menu.product, menu.price from orders join users on orders.user_id=users.user_id join menu on orders.menu_item_id=menu.menu_id where order_id= %s", [order_id])
+        data = database_query.cur.fetchall()
+        return jsonify(data), 200
+
+class menu:
     def new_menu(self, menu_data):
         x = database_query.database_query()
         if x.check_table("menu"):
