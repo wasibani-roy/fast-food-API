@@ -17,18 +17,18 @@ class user_registration(Resource):
         password = data["password"].strip()
 
         if user_name == "" or email == "" or  password == "":
-            return jsonify({"Error": "Fields have not been filled"}), 404
+            return jsonify({"Error": "Fields have not been filled"}), 400
         else:
             t = tuple(user_name)
             if  t[0].isdigit():
-                return jsonify({"error": "username cant be string"}), 404
+                return jsonify({"error": "username cant be string"}), 400
             else:
-                new_user = Users()
-                password_candidste = models.Users.generate_hash(password)
-                user_data = {"username": user_name.lower(), "email": email, "password": password_candidste}
+                # password_candidste = Users.generate_hash(password)
+                new_user = Users(user_name,email,password)
 
-                return new_user.check_user(user_data)
+                # user_data = {"username": user_name.lower(), "email": email, "password": password_candidste}
 
+                return new_user.check_user()
 
 
 class user_login(Resource):
@@ -37,10 +37,14 @@ class user_login(Resource):
         parser.add_argument('username', help='This field cannot be blank', required=True)
         parser.add_argument('password', help='This field cannot be blank', required=True)
         data = parser.parse_args()
-        username = data['username'].lower()
+        user_name = data['username'].lower()
+        username = user_name.strip()
         password = data['password']
-        verify_user = Users()
-        return verify_user.authenticate_user(username, password)
+        if username == "" or password == "":
+            return jsonify({"Error": "Username or password missing"}),400
+        else:
+            verify_user = Users(username, password, email="none")
+            return verify_user.authenticate_user()
 
 
 

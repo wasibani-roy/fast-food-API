@@ -5,7 +5,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from fast_food_api import models
 from fast_food_api.models.models import menu
 
-class menu(Resource):
+class menu_items(Resource):
 
     @jwt_required
     def post(self):
@@ -20,15 +20,15 @@ class menu(Resource):
             description = data['description'].strip()
             price = data['price'].strip()
             if product == "" or description == "" or price == "":
-                return jsonify({"Error": "Sorry one or more fields are incomplete"}), 404
+                return jsonify({"Error": "Sorry one or more fields are incomplete"}), 400
             else:
                 data = {"product": product, "description": description, "price": price}
-                menu_item = menu()
-                return menu_item.new_menu(data)
+                menu_item = menu(product=product, description=description, price=price)
+                return menu_item.new_menu()
         else:
-            return jsonify({"Error": "Unauthorised"}), 400
+            return jsonify({"Message": "Unauthorised"}), 200
 
     def get(self):
-        all_menu_items = menu()
+        all_menu_items = menu(product="none", price="none", description="none")
         return all_menu_items.get_menu_items()
 
