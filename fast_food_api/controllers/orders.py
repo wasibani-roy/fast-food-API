@@ -30,10 +30,7 @@ class order_modal(Resource):
         else:
             return jsonify({"Error": "Unauthorised access"}), 400
 
-    # def get(self):
-    #     current_user = get_jwt_identity()
-    #     orders = Order(user_id=current_user, menu_id="null", status="null", order_id="null")
-    #     return orders.get_user_order()
+ 
 
 
     def put(self):
