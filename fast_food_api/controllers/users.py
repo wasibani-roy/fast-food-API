@@ -1,8 +1,5 @@
 from flask_restful import Resource, reqparse
-from flask import redirect, url_for, logging, jsonify
-# from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt
-# from passlib.hash import pbkdf2_sha256 as sha256
-from fast_food_api import models
+from flask import jsonify
 from fast_food_api.models.models import Users
 
 class user_registration(Resource):
@@ -14,6 +11,14 @@ class user_registration(Resource):
         data = parser.parse_args()
         user_name = data["username"].strip()
         email = data["email"].strip()
+        if '@' and '.' not in email:
+            return jsonify({"error": "Please input a valid email"}), 400
+        elif email[0] == '@' or email[0] == '.':
+            return jsonify({"error": "Please input a valid email"}), 400
+        elif email.index("@") >= email.index('.'):
+            return jsonify({"error": "Please input a valid email"}),
+        elif email.count("@") > 1 or email.count(".") > 1:
+            return jsonify({"error": "Please input a valid email"}), 400
         password = data["password"].strip()
 
         if user_name == "" or email == "" or  password == "":
@@ -24,7 +29,7 @@ class user_registration(Resource):
                 return jsonify({"error": "username cant be string"}), 400
             else:
                 # password_candidste = Users.generate_hash(password)
-                new_user = Users(user_name,email,password)
+                new_user = Users(user_name,password,email)
 
                 # user_data = {"username": user_name.lower(), "email": email, "password": password_candidste}
 

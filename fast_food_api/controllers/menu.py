@@ -3,7 +3,7 @@ from flask import redirect, url_for, logging, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 # from passlib.hash import pbkdf2_sha256 as sha256
 from fast_food_api import models
-from fast_food_api.models.models import menu
+from fast_food_api.models.models import Menu
 
 class menu_items(Resource):
 
@@ -23,12 +23,12 @@ class menu_items(Resource):
                 return jsonify({"Error": "Sorry one or more fields are incomplete"}), 400
             else:
                 data = {"product": product, "description": description, "price": price}
-                menu_item = menu(product=product, description=description, price=price)
+                menu_item = Menu(product=product, description=description, price=price)
                 return menu_item.new_menu()
         else:
             return jsonify({"Message": "Unauthorised"}), 200
 
     def get(self):
-        all_menu_items = menu(product="none", price="none", description="none")
+        all_menu_items = Menu(product="none", price="none", description="none")
         return all_menu_items.get_menu_items()
 

@@ -1,5 +1,5 @@
 import psycopg2
-con = psycopg2.connect("dbname=fastfoodapp user=postgres host=localhost password=root")
+con = psycopg2.connect("dbname=fastfoodapp user=postgres host=localhost")
 cur = con.cursor()
 class database_query:
     def check_table(self, table_name):
