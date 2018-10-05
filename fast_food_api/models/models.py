@@ -60,7 +60,7 @@ class Order:
             order_details = (self.menu_item_id, self.user_id, self.status)
             database_query.cur.execute(query, order_details)
             database_query.con.commit()
-            return jsonify({"success": "order placed"}), 200
+            return jsonify({"success": "order placed"}), 201
         else:
             database_query.cur.execute \
                     (
@@ -70,7 +70,7 @@ class Order:
             order_details = (self.menu_item_id, self.user_id, self.status)
             database_query.cur.execute(query, order_details)
             database_query.con.commit()
-            return jsonify({"success": "order placed"}), 200
+            return jsonify({"success": "order placed"}), 201
 
     def get_order_items(self):
         database_query.cur.execute("select users.username, menu.product, menu.price\
