@@ -1,7 +1,6 @@
 from flask_restful import Resource, reqparse
 from flask import redirect, url_for, logging, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
-# from passlib.hash import pbkdf2_sha256 as sha256
 from fast_food_api import models
 from fast_food_api.models.models import Menu
 
