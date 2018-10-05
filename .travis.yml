@@ -5,15 +5,14 @@ python:
 install:
   - pip install -r requirements.txt
   - pip install coveralls
-  - pip install nose
+  
 services:
   - postgresql
 before_script:
   - psql -c 'create database fastfoodapp;' -U postgres
 # command to run tests
 
-script: 
-  - nosetests --with-coverage --cover-package=app
+script: pytest -v --cov=fast_food_api/tests --cov-report term-missing
 branches:only: ft-challenge-3-api
 after_success:
   - coveralls
