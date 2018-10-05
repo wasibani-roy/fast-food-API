@@ -1,5 +1,8 @@
 import psycopg2
-con = psycopg2.connect("dbname=fastfoodapp user=postgres host=localhost")
+import os
+if os.getenv("FLASK_ENV") == "Production":
+    con = psycopg2.connect(os.getenv("DATABASE_URL"))
+con = psycopg2.connect("dbname=fastfoodapp user=postgres host=localhost password=root")
 cur = con.cursor()
 class database_query:
     def check_table(self, table_name):
